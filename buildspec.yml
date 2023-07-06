@@ -1,0 +1,14 @@
+version: 0.2
+​
+phases:
+  install:
+    runtime-versions:
+      java: corretto8
+  build:
+    commands:
+      - echo Build started on `date` 
+      - cd ./app && mvn clean package
+artifacts:
+  files:
+    - app/target/verademo.war
+  discard-paths: yes
