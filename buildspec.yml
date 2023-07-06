@@ -5,8 +5,16 @@ phases:
       java: corretto8
   build:
     commands:
-      - echo Build started on `date` 
+      - echo Build started on `date`
       - cd ./app && mvn clean package
+      - java -jar /opt/veracode/api-wrapper.jar \
+        -action uploadandscan \
+        -vid $VID \
+        -vkey $VKEY \
+        -appname “Veracode Test” \
+        -createprofile false \
+        -version $(date +%Y-%m-%d-%H:%M) \
+        -filepath target/verademo.war
 artifacts:
   files:
     - app/target/verademo.war
